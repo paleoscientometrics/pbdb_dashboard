@@ -1,13 +1,15 @@
 ---
-title: "Untitled"
+title: "Knowledge imbalance in Palaeontology"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
     social: menu
-    source: embed
-    theme: cosmo
+    # source: embed
+    css: assets/style.css
 #    logo: favicon_48x48.png
 #    favicon: favicon_48x48.png
+    navbar:
+      - { title: "Back to Homepage", icon: "fa-home", href: "https://paleoscientometrics.github.io/", align: right }
 ---
 
 ```{r setup, include=FALSE}
@@ -21,30 +23,25 @@ pbdb <- readRDS(file.path("data", "pbdb.rds"))
 pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 ```
 
-### Fossil sampling is concentrated mainly in the US and Europe, followed by East Asia
+### Based on the **Paleobiology Database**, we see that most of the fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=400}
 
 ```{r sampling}
 source("scripts/01-bubble_map.R")
 
-fig
+fig_fn
 ```
 
 ***
 
-https://rstudio.github.io/leaflet/
+#### Proportion of fossil collections in:
 
-- Interactive panning/zooming
+- **Northern America:** `r round(sum(colls[colls$region == "Northern America",]$n)/sum(colls$n)*100,2)` %
 
-- Compose maps using arbitrary combinations of map tiles, markers, polygons, lines, popups, and GeoJSON.
+- **Northern & Western Europe:** `r round(sum(colls[colls$region %in% c("Western Europe", "Northern Europe"),]$n)/sum(colls$n)*100,2)` %
 
-- Create maps right from the R console or RStudio
+- **East Asia:** `r round(sum(colls[colls$region == "Eastern Asia",]$n)/sum(colls$n)*100, 2)` %
 
-- Embed maps in knitr/R Markdown documents and Shiny apps
-
-- Easily render Spatial objects from the sp package, or data frames with latitude/longitude columns
-
-- Use map bounds and mouse events to drive Shiny logic
-
+*Last updated 31 January 2021*
 
 ### Chart B
 
