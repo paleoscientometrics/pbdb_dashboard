@@ -1,0 +1,60 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    social: menu
+    source: embed
+    theme: cosmo
+#    logo: favicon_48x48.png
+#    favicon: favicon_48x48.png
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(plotly)
+
+```
+
+```{r data, include=FALSE}
+pbdb <- readRDS(file.path("data", "pbdb.rds"))
+pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
+```
+
+### Fossil sampling is concentrated mainly in the US and Europe, followed by East Asia
+
+```{r sampling}
+source("scripts/01-bubble_map.R")
+
+fig
+```
+
+***
+
+https://rstudio.github.io/leaflet/
+
+- Interactive panning/zooming
+
+- Compose maps using arbitrary combinations of map tiles, markers, polygons, lines, popups, and GeoJSON.
+
+- Create maps right from the R console or RStudio
+
+- Embed maps in knitr/R Markdown documents and Shiny apps
+
+- Easily render Spatial objects from the sp package, or data frames with latitude/longitude columns
+
+- Use map bounds and mouse events to drive Shiny logic
+
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
