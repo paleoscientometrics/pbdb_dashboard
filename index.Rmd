@@ -23,7 +23,7 @@ pbdb <- readRDS(file.path("data", "pbdb.rds"))
 pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 ```
 
-### Based on the **Paleobiology Database**, we see that most of the fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=400}
+### Based on the **Paleobiology Database**, we see that most of the fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=300}
 
 ```{r sampling}
 source("scripts/01-bubble_map.R")
@@ -33,7 +33,12 @@ fig_fn
 
 ***
 
-#### Proportion of fossil collections in:
+![](assets/gauge.svg){#id .class width=290px}
+
+We only focus on publications published betweeen 1990 - 2020.
+
+***
+#### Proportions of fossil collections in:
 
 - **Northern America:** `r round(sum(colls[colls$region == "Northern America",]$n)/sum(colls$n)*100,2)` %
 
@@ -41,7 +46,7 @@ fig_fn
 
 - **East Asia:** `r round(sum(colls[colls$region == "Eastern Asia",]$n)/sum(colls$n)*100, 2)` %
 
-*Last updated 31 January 2021*
+<p><span style="float:right;">*Last updated 31 January 2021*.</span></p>
 
 ### Chart B
 
