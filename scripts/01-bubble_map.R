@@ -6,6 +6,10 @@ library(tidyverse)
 pbdb <- readRDS(file.path("data", "pbdb.rds"))
 pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 
+load("data/refs.RData")
+
+pbdb <- pbdb[pbdb$reference_no %in% all_refs$reference_no,] # 1989 - 2021 only
+
 # per country
 colls <- pbdb %>% distinct(country, collection_no) %>% 
 	group_by(country) %>% 
@@ -48,7 +52,15 @@ g <- list(
 
 fig<- 
 	fig %>% layout(title = '<b>Number of fossil collections per country</b>', 
-				   geo = g)
+				   geo = g, 
+				   margin = list(b=50), ##bottom margin in pixels
+				   annotations = 
+				   	list(x = 0.3, y = -0.05, #position of text adjust as needed 
+				   		 text = "© 2021 Pal(a)eoScientometrics", 
+				   		 showarrow = F, xref='paper', yref='paper', 
+				   		 xanchor='right', yanchor='auto', xshift=0, yshift=0,
+				   		 font=list(size=8, color="grey"))
+	)
 
 
 fig_fn <- fig %>% add_markers(
@@ -62,5 +74,4 @@ fig_fn <- fig %>% add_markers(
 )
 
 
-fig_fn
 

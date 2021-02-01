@@ -56,3 +56,41 @@ pbdb$country[pbdb$country=="United States Minor Outlying Islands (the)"] <- "Uni
 
 saveRDS(pbdb[,c("collection_no", "lng", "lat", "reference_no", "country", "cc")], file="data/pbdb.rds")
 
+all_refs <- read.csv("https://raw.githubusercontent.com/paleoscientometrics/paleo-aff-initiative/main/data_archive/PBDB_refs.csv")
+
+all_refs <- all_refs[all_refs$pubyr > 1989 & all_refs$pubyr < 2021,]
+
+completed_refs <- read.csv("https://raw.githubusercontent.com/paleoscientometrics/paleo-aff-initiative/main/data_archive/aff-data-complete.csv")
+
+save(all_refs, completed_refs, file="data/refs.RData")
+
+
+# Progress ----------------------------------------------------------------
+library(plotly)
+library(dplyr)
+
+load("data/refs.RData")
+
+fig <- plot_ly(
+	type = "indicator",
+	mode = "gauge+number",
+	value = length(unique(completed_refs$reference_no)),
+	title = list(text = "<b>Number of publications \ninjested</b>", font = list(size = 16)),
+	gauge = list(
+		axis = list(range = list(NULL, nrow(all_refs)), tickwidth = 1, tickcolor = "darkgreen"),
+		bar = list(color = toRGB(pal[5])),
+		bgcolor = "white",
+		borderwidth = 1,
+		bordercolor = "gray",
+		steps = list(
+			list(range = c(0, nrow(all_refs)), color = "white"))
+	), width=320, height=200
+)
+
+fig <- fig %>%
+	layout(
+		margin = list(l=0,r=0, t=80, b=10, pad=0),
+		paper_bgcolor='rgba(0,0,0,0)',
+		plot_bgcolor='rgba(0,0,0,0)')
+
+orca(fig, file = "assets/gauge.svg")
