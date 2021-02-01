@@ -23,7 +23,7 @@ pbdb <- readRDS(file.path("data", "pbdb.rds"))
 pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 ```
 
-### Based on the **Paleobiology Database**, we see that most of the fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=300}
+### Based on data in the **Paleobiology Database**, the majority of fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=300}
 
 ```{r sampling}
 source("scripts/01-bubble_map.R")
