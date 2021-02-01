@@ -19,6 +19,16 @@
     color: #173109;
 }
 
+/*Gauge*/
+
+
+.html-widget.gauge svg {
+  height: 150px;
+  width: 300px;
+  margin-top: -10px;
+  margin-bottom: -40px;
+}
+
 /* From the lumen */
 body {
   padding-top: 63px;
