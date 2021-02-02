@@ -42,14 +42,14 @@ coll_n <- coll_n %>% mutate(classification=recode(classification,
 						 "LM"="Lower Middle Income",
 						 "L"="Low Income"))
 
-coll_n$pathString = paste("world", coll_n$region, coll_n$classification, coll_n$country, sep="-")
+coll_n$pathString = paste("World", coll_n$region, coll_n$classification, coll_n$country, sep="-")
 
 seq <- coll_n[,c("pathString", "freq")]
 
 # colors
 
 # match those colors to leaf names, matched by index
-labels <- c("world", 
+labels <- c("World", 
 			"Africa", "Asia", "Oceania", "Europe", "Americas",
 			"Low Income", "Lower Middle Income", "Upper Middle Income", "High Income",
 			coll_n[order(coll_n$freq),]$country)
@@ -63,6 +63,6 @@ fig_sb <- sunburst(seq, count=TRUE,
 				   colors = list(range = colours,
 				   			  domain = labels), 
 				   legend=FALSE,
-				   percent = TRUE)
+				   percent = FALSE)
 fig_sb
 
