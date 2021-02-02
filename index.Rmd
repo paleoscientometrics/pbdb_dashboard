@@ -49,7 +49,7 @@ We only focus on publications published betweeen 1990 - 2020.
 
 <p><span style="float:right;">*Last updated 31 January 2021*.</span></p>
 
-### The regions where the most sampled collections are, also tend to be **high income** countries with higher Gross Domestic Product (GDP) and available research funding. {data-commentary-width=400}
+### The regions where the most sampled collections are, also tend to be where **high income** countries with higher Gross Domestic Product (GDP) and available research funding are located. {data-commentary-width=400}
 
 ```{r circle-packing}
 source("scripts/02-sunburst.R")
