@@ -49,7 +49,7 @@ We only focus on publications published betweeen 1990 - 2020.
 
 <p><span style="float:right;">*Last updated 31 January 2021*.</span></p>
 
-### The regions where the most sampled collections are, also tend to be where **high income** countries with higher Gross Domestic Product (GDP) and available research funding are located. {data-commentary-width=400}
+### The regions where the most sampled collections are, also tend to be where **high income** countries with higher Gross Domestic Product (GDP) and available research funding are located. {data-commentary-width=600}
 
 ```{r circle-packing}
 source("scripts/02-sunburst.R")
@@ -59,11 +59,19 @@ fig_sb
 
 ***
 
-![](assets/iconmonstr-arrow-72.svg){#id .class width=24px} *Hover over the sections to see the details.*
+<h4> ![](assets/iconmonstr-arrow-72.svg){#id .class width=24px}  Proportion of fossil collections per region, income class and countries </h4>
+*Hover over the sections to see the details.*
 
 The **darker regions** represents the regions, income classes or countries with the the **highest number of fossil collections**.
 
 In general, regions like **Europe** and **Americas (mostly Northern America)** have the most number of fossil collections in their regions. Lower income countries, especially most of *Africa* and parts of *Asia* tend to have a lower number of fossil collections in the region.
+
+***
+```{r, gdp-research}
+source("scripts/03-gdp_funding.R")
+
+fig
+```
 
 ### Chart C
 
