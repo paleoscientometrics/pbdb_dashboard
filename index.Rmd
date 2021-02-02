@@ -15,6 +15,7 @@ output:
 ```{r setup, include=FALSE}
 library(flexdashboard)
 library(plotly)
+library(widgetframe)
 
 ```
 
@@ -25,7 +26,7 @@ pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 
 ### Based on data in the **Paleobiology Database**, the majority of fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=300}
 
-```{r sampling}
+```{r sampling-gauge}
 source("scripts/01-bubble_map.R")
 
 fig_fn
@@ -48,11 +49,21 @@ We only focus on publications published betweeen 1990 - 2020.
 
 <p><span style="float:right;">*Last updated 31 January 2021*.</span></p>
 
-### Chart B
+### The regions where the most sampled collections are, also tend to be **high income** countries with higher Gross Domestic Product (GDP) and available research funding. {data-commentary-width=400}
 
-```{r}
+```{r circle-packing}
+source("scripts/02-sunburst.R")
 
+fig_sb
 ```
+
+***
+
+![](assets/iconmonstr-arrow-72.svg){#id .class width=24px} *Hover over the sections to see the details.*
+
+The **darker regions** represents the regions, income classes or countries with the the **highest number of fossil collections**.
+
+In general, regions like **Europe** and **Americas (mostly Northern America)** have the most number of fossil collections in their regions. Lower income countries, especially most of *Africa* and parts of *Asia* tend to have a lower number of fossil collections in the region.
 
 ### Chart C
 
