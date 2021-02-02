@@ -63,6 +63,6 @@ fig_sb <- sunburst(seq, count=TRUE,
 				   colors = list(range = colours,
 				   			  domain = labels), 
 				   legend=FALSE,
-				   percent = TRUE, height=600)
+				   percent = TRUE)
 fig_sb
 
