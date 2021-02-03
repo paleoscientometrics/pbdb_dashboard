@@ -56,7 +56,7 @@ fig<-
 				   margin = list(b=50), ##bottom margin in pixels
 				   annotations = 
 				   	list(x = 0.3, y = -0.05, #position of text adjust as needed 
-				   		 text = "© 2021 Pal(a)eoScientometrics", 
+				   		 text = "? 2021 Pal(a)eoScientometrics", 
 				   		 showarrow = F, xref='paper', yref='paper', 
 				   		 xanchor='right', yanchor='auto', xshift=0, yshift=0,
 				   		 font=list(size=8, color="grey"))
@@ -70,7 +70,11 @@ fig_fn <- fig %>% add_markers(
 		line = list(color=toRGB("white"))
 	),
 	hoverinfo = "text",
-	text = ~paste(sprintf("<b>%s</b></br>", colls$country), "Number of fossil collections:", "<br />", prettyNum(colls$n, big.mark = ","))
+	text = ~paste(sprintf("<b>%s</b></br>", colls$country), 
+				  "Number of fossil collections:", "<br />", 
+				  prettyNum(colls$n, big.mark = ","),
+				 "<br>GDP:" 
+				  )
 )
 
 
