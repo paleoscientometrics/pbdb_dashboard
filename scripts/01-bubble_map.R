@@ -66,7 +66,7 @@ fig<-
 fig_fn <- fig %>% add_markers(
 	x = ~x, y = ~y, size = ~n,  
 	marker = list(
-		color = toRGB(pal[5], alpha=0.8),
+		color = toRGB(pal[4], alpha=0.8),
 		line = list(color=toRGB("white"))
 	),
 	hoverinfo = "text",
