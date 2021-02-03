@@ -19,6 +19,10 @@
     color: #173109;
 }
 
+.flowing-content-shim {
+    overflow: hidden;
+}
+
 /*Gauge*/
 
 

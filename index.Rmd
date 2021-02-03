@@ -67,11 +67,13 @@ The **darker regions** represents the regions, income classes or countries with 
 In general, regions like **Europe** and **Americas (mostly Northern America)** have the most number of fossil collections in their regions. Lower income countries, especially most of *Africa* and parts of *Asia* tend to have a lower number of fossil collections in the region.
 
 ***
+<div style="max-height:250px">
+
 ```{r, gdp-research}
 source("scripts/03-gdp_funding.R")
-
 fig
 ```
+</div>
 
 ### Chart C
 

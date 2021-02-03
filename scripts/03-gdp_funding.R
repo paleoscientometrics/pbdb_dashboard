@@ -63,7 +63,7 @@ x <- list(
 	type="log"
 )
 y <- list(
-	title = "Research Funding per capita",
+	title = "Research Funding \nper capita",
 	titlefont = f,
 	showgrid=FALSE
 )
@@ -71,9 +71,9 @@ y <- list(
 fig <- fig %>% layout(title = 'Relationship between GDP and Research Funding',
 					  xaxis = x,
 					  yaxis = y,
-					  autosize = T, width = 500, height=400,
+					  autosize = T, width = 550, height=250,
 					  annotations = 
-					  	list(x = 0.5, y = -0.3, #position of text adjust as needed 
+					  	list(x = 0.5, y = -0.5, #position of text adjust as needed 
 					  		 text = "All values given in the current international $", 
 					  		 showarrow = F, xref='paper', yref='paper', 
 					  		 xanchor='right', yanchor='auto', xshift=0, yshift=0,
@@ -81,6 +81,6 @@ fig <- fig %>% layout(title = 'Relationship between GDP and Research Funding',
 					  plot_bgcolor="rgba(0,0,0,0)",
 					  paper_bgcolor='rgba(0,0,0,0)',
 					  margin = m <- list(
-					  	b=100
+					  	b=75, pad=1
 					  )
 )
