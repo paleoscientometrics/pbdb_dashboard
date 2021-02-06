@@ -84,7 +84,7 @@ fig_fn2
 
 ***
 
-High income countries in general also produce more researchers in average. With the availability of more research funding, these researchers have higher mobility as to where they can go to conduct fieldwork as compared to other income groups.
+High income countries in general also **produce more researchers** in average. With the availability of more **research funding**, these researchers have **higher mobility** as to where they can go to conduct fieldwork as compared to other income groups.
 
 This is especially true for Northern America and most of Europe, which shows a major concentration of the source of publications in the field of palaeontology.
 
