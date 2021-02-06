@@ -4,7 +4,6 @@ library(rworldmap)
 library(tidyverse)
 
 pbdb <- readRDS(file.path("data", "pbdb.rds"))
-pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 
 load("data/refs.RData")
 

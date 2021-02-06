@@ -94,3 +94,15 @@ This is especially true for Northern America and most of Europe, which shows a m
 fig2
 ```
 
+### Most palaeontological publications, as in the rest of academia, were in English, with a smaller portion in German and French. {data-commentary-width=600}
+
+<div style="max-height:300px">
+```{r language}
+source("scripts/05-language.R")
+
+widg
+```
+</div>
+
+***
+Things will go here
