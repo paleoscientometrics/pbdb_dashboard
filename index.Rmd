@@ -23,7 +23,7 @@ pbdb <- readRDS(file.path("data", "pbdb.rds"))
 pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 ```
 
-### Based on data in the **Paleobiology Database**, the majority of fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=600}
+### Based on data in the **Paleobiology Database**, the majority of fossil collections are located in **North America** and **Europe**. A small portion also comes from the East Asian region. {data-commentary-width=400}
 
 ```{r sampling-gauge}
 source("scripts/01-bubble_map.R")
@@ -74,7 +74,7 @@ fig
 ```
 </div>
 
-### Most researchers reporting these fossil collections were also based at institutions in high income countries, leading to a greated imbalance. {data-commentary-width=600}
+### Most **researchers** reporting these fossil collections were also based at institutions in **high income countries**, leading to a greater imbalance to who **gets to do research and where**. {data-commentary-width=400}
 
 ```{r researchers_country}
 source("scripts/04-researchers.R")
@@ -84,4 +84,13 @@ fig_fn2
 
 ***
 
-Some description here
+High income countries in general also produce more researchers in average. With the availability of more research funding, these researchers have higher mobility as to where they can go to conduct fieldwork as compared to other income groups.
+
+This is especially true for Northern America and most of Europe, which shows a major concentration of the source of publications in the field of palaeontology.
+
+***
+
+```{r number-of-researchers}
+fig2
+```
+

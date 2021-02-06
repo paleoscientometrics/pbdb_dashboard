@@ -64,9 +64,9 @@ fig<-
 
 
 fig_fn <- fig %>% add_markers(
-	x = ~x, y = ~y, size = ~n,  
+	x = ~x, y = ~y, size = ~n, 
 	marker = list(
-		color = toRGB(pal[4], alpha=0.8),
+		color = toRGB("#238b45", alpha=0.9),
 		line = list(color=toRGB("white"))
 	),
 	hoverinfo = "text",
@@ -75,6 +75,7 @@ fig_fn <- fig %>% add_markers(
 				  prettyNum(colls$n, big.mark = ",")
 				  )
 )
+
 
 
 

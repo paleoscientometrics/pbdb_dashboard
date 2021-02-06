@@ -8,6 +8,8 @@ library(countrycode)
 # Load data ---------------------------------------------------------------
 pbdb <- readRDS(file.path("data", "pbdb.rds"))
 pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
+income <- read.csv(file.path("data", "2019_income_classification_worldbank.csv"))
+researchers <- read.csv(file.path("data", "2021-02-06_researchers_Worldbank.csv"), skip=4)
 
 load(file.path("data", "refs.RData"))
 
@@ -51,6 +53,12 @@ colls <- merge(colls, df, all.x=T, all.y=F)
 colls <- na.omit(colls)
 colls$country <- countrycode(colls$aff_cc, "iso3c", "country.name")
 
+# add income
+colls <- merge(colls, income[,c("code", "classification")], 
+               by.x="aff_cc", by.y="code", 
+               all.x=TRUE, all.y=FALSE)
+colls$classification <- factor(colls$classification, levels=c("L", "LM", "UM", "H"), labels=c("Low Income", "Lower Middle Income", "Upper Middle Income", "High Income"))
+
 fig <- plot_geo(colls, sizes = c(1, 5000))
 
 g <- list(
@@ -70,22 +78,90 @@ fig<-
                  margin = list(b=50), ##bottom margin in pixels
                  annotations = 
                    list(x = 0.3, y = -0.05, #position of text adjust as needed 
-                        text = "© 2021 Pal(a)eoScientometrics", 
+                        text = "Copyright © 2021 Pal(a)eoScientometrics", 
                         showarrow = F, xref='paper', yref='paper', 
                         xanchor='right', yanchor='auto', xshift=0, yshift=0,
-                        font=list(size=8, color="grey"))
+                        font=list(size=8, color="grey")
+                   )
   )
 
 
-fig_fn2 <- fig %>% add_markers(
-  x = ~x, y = ~y, size = ~n,  
+fig <- fig %>% add_markers(
+  x = ~x, y = ~y, size = ~n,color=~classification, colors = "Greens",
   marker = list(
-    color = toRGB(pal[4], alpha=0.8),
+    
     line = list(color=toRGB("white"))
   ),
   hoverinfo = "text",
   text = ~paste(sprintf("<b>%s</b></br>", colls$country), 
                 "Number of fossil collections:", "<br />", 
                 prettyNum(colls$n, big.mark = ",")
-  )
+  ),
+  showlegend=TRUE
 )
+
+fig_fn2 <- fig %>% layout(legend=list(itemsizing="constant"))
+
+
+# Researchers -------------------------------------------------------------
+researchers <- researchers[grep("income$", researchers$Country.Name),]
+researchers <- researchers[researchers$Country.Name != "Low & middle income",]
+
+researchers <- reshape2::melt(researchers, id.vars=c("Country.Name", "Country.Code", "Indicator.Name", "Indicator.Code"),
+               variable.name = "year")
+researchers$year <- as.numeric(gsub("^X", "", researchers$year))
+
+researchers <- researchers %>% 
+  filter(year > 1990) %>% 
+  group_by(Country.Name) %>% 
+  summarise(value=mean(value, na.rm=TRUE))
+
+researchers$value[2] <- 0
+researchers$classification <- factor(researchers$Country.Name, 
+                                     levels=c("Low income", "Lower middle income", 
+                                              "Upper middle income", "High income"), 
+                                     labels=c("Low Income", "Lower Middle Income", "Upper Middle Income", "High Income"))
+
+
+fig2 <- plot_ly(researchers, y = ~classification, x = ~value, orientation = 'h', 
+                type = 'bar', color=~classification, colors ="Greens", 
+                marker=list(width=0.8), width = 350, height=250,
+                hoverinfo = "text",
+                text = ~paste(sprintf("<b>%s</b> per million people", round(researchers$value)))
+                )
+
+f <- list(
+  family = "Roboto Mono",
+  size = 14,
+  color = "#7f7f7f"
+)
+
+x <- list(
+  title = "",
+  titlefont = f, 
+  showgrid=FALSE
+)
+
+y <- list(
+  title = "",
+  titlefont = f,
+  showgrid=FALSE)
+
+fig2 <- fig2 %>% layout(title = 'Number of researchers \nper million people',
+                      xaxis = x,
+                      yaxis = y,
+                      autosize = T,
+                      plot_bgcolor="rgba(0,0,0,0)",
+                      paper_bgcolor='rgba(0,0,0,0)',
+                      margin = m <- list(
+                        t=50, b=10, l=50, r=50, pad=1
+                      ),
+                      showlegend = FALSE,
+                      annotations = 
+                        list(x = 1400, y = 0, #position of text adjust as needed 
+                             text = "No data available", 
+                             showarrow = F, xref='x', yref='y', 
+                             align="center")
+)
+
+
