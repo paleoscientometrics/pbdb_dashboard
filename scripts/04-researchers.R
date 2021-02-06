@@ -123,12 +123,7 @@ researchers$classification <- factor(researchers$Country.Name,
                                      labels=c("Low Income", "Lower Middle Income", "Upper Middle Income", "High Income"))
 
 
-fig2 <- plot_ly(researchers, y = ~classification, x = ~value, orientation = 'h', 
-                type = 'bar', color=~classification, colors ="Greens", 
-                marker=list(width=0.8), width = 350, height=250,
-                hoverinfo = "text",
-                text = ~paste(sprintf("<b>%s</b> per million people", round(researchers$value)))
-                )
+# Plot --------------------------------------------------------------------
 
 f <- list(
   family = "Roboto Mono",
@@ -147,7 +142,17 @@ y <- list(
   titlefont = f,
   showgrid=FALSE)
 
-fig2 <- fig2 %>% layout(title = 'Number of researchers \nper million people',
+
+fig2 <- plot_ly(researchers, y = ~classification, x = ~value, orientation = 'h', 
+                type = 'bar', color=~classification, colors ="Greens", 
+                marker=list(width=0.8), width = 350, height=250,
+                hoverinfo = "text",
+                text = ~paste(sprintf("<b>%s</b> per million people", round(researchers$value)))
+                )
+
+
+fig2 <- fig2 %>% layout(title = list(text='Number of researchers \nper million people',
+                        font=list(size=16)),
                       xaxis = x,
                       yaxis = y,
                       autosize = T,
