@@ -3,6 +3,7 @@ title: "Knowledge imbalance in Palaeontology"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
+    vertical_layout: fill
     social: menu
     # source: embed
     css: assets/style.css
@@ -94,15 +95,25 @@ This is especially true for Northern America and most of Europe, which shows a m
 fig2
 ```
 
-### Most palaeontological publications, as in the rest of academia, were in English, with a smaller portion in German and French. {data-commentary-width=600}
+### Most palaeontological **publications**, as in the rest of academia, were **in English**, with a smaller portion in Spanish, German and French, showing clear **evidence of linguistic bias**. {data-commentary-width=600}
 
-<div style="max-height:300px">
 ```{r language}
 source("scripts/05-language.R")
 
 widg
 ```
-</div>
 
 ***
-Things will go here
+Through centuries of colonialism, neocolonialism, Cold War expansionism, and, most recently, globalization, English has become the **world's most dominant language** in academia (as well as in other sectors). The  monopoly  of the English-language  in scientific journals  means  that scholarly interests  are **controlled by a specific group** of researchers. This is bias clearly exists in our data, which is mostly curated by researchers from English-speaking countries or countries with high English proficiency.
+
+#### **Did you know that countries with higher English proficiencies tend to have better economies?**
+
+The interaction between English proficiency and economic performance is a virtuous cycle, with improving English skills driving up performance, which in turn give governments more funds to invest in language training. Countries with higher English proficiency spend a significantly larger share of their GDP on research and also tend to have more researchers per capita.
+
+<div style="max-height:300px">
+
+
+```{r}
+fig_eng
+```
+</div>
