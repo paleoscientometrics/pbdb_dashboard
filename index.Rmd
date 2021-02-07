@@ -113,7 +113,56 @@ The interaction between English proficiency and economic performance is a virtuo
 <div style="max-height:300px">
 
 
-```{r}
+```{r language-2}
 fig_eng
 ```
 </div>
+
+### But **research output** is not only linked to **economic growth** but also other **social dimensions** such as life expectancy, education and the standard of living as well as political stability. {data-commentary-width=500}
+
+```{r complex-graph}
+source("scripts/06-HDI.R")
+
+fig_hdi
+```
+
+*** 
+
+#### How to read this graph
+
+```{r how-to, fig.width=5, fig.height=4}
+p <- ggplot(data.frame(x=c(0,0.5,0.85), y=c(0,0,0), size=c(3,2,1), lang=c(3,1,2)), 
+	   aes(x=x, y=y, size=size, fill=size, color=as.factor(lang))
+	   ) +
+	geom_point(alpha=0.7, shape=21, stroke=2) +
+	scale_size(range=c(10,30))+
+	scale_fill_gradient(low=pal[1], high=pal[4]) +
+	scale_color_manual(values=c("grey60", "grey30", "grey10"), breaks=c(1,2,3)) +
+	coord_cartesian(ylim=c(-0.1,0.1), xlim=c(-0.2,1.3)) +
+	theme_void() +
+	theme(legend.position ="none")
+p <- p + annotate("segment", x=-0.15, xend = 0.85, y=-0.04, yend=-0.04, size=1,
+			 arrow=arrow(type="closed", length=unit(0.15, "inches")), color="darkgrey") +
+	annotate("text", x=0.35, y=-0.05, size=3, fontface=3, color="grey20",
+			 label="Decreasing size represents \ndecreasing number of collections")
+p <- p + annotate("segment", x=c(0, 0.5), xend=c(0.15, 0.35), 
+			 y=c(0.03, 0.025), yend=0.06, size=1, color="grey50",
+			 arrow=arrow(type="closed", length=unit(0.15, "inches"), ends="first")) +
+	annotate("text", x=0.25, y=0.08, size=3, fontface=3, color="grey20",
+			 label="The lighter the line colours, \nthe lower the English proficiency \nof the population of the country")
+p <- p + annotate("segment", x=0.85, xend=0.95, 
+			 y=0, yend=0.03, color="grey50", size=1,
+			 arrow=arrow(type="closed", length=unit(0.08, "inches"), ends="first")) +
+	annotate("text", x=0.8, y=0.05, size=3, fontface=3, color="grey20", hjust=0,
+			 label="The colour of the circle\nshows the GDP per capita.\nThe darker the circle, \nthe higher the GDP")
+
+p + annotate("text", x=-0.3, y=-0.08, size=3, fontface=2, color="grey20", hjust=0,
+			  label="The x-axis shows increasing human development and the y-axis \nincrease peace in a country.") +
+	annotate("text", x=-0.3, y=-0.1, size=3, fontface=3, color="grey20", hjust=0,
+			 label="Hover over the points of the graph for more details.")
+
+```
+
+The **Human Development Index (HDI)**  is a statistic composite index of life expectancy, education (literacy rate, gross enrollment ratio at different levels and net attendance ratio), and per capita income indicators. A country scores a higher HDI when the lifespan is higher, the education level is higher, and the gross national income GNI (PPP) per capita is higher. 
+
+The **Global Peace Index (GPI)** measures the relative position of nations' and regions' peacefulness.The lower the number, the more peaceful the country.

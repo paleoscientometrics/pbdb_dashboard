@@ -20,12 +20,16 @@ colls <- pbdb %>% distinct(country, collection_no) %>%
 # get world map
 wmap <- getMap(resolution="high")
 
+#get area
+area <- gArea(wmap, byid=TRUE)
+
 # get centroids
 centroids <- gCentroid(wmap, byid=TRUE)
 
 # get a data.frame with centroids
 df <- as.data.frame(centroids)
 df$country <- row.names(df)
+df$area <- area
 
 colls$country[grep("United States", colls$country)] <- "United States of America" 
 colls <- merge(colls, df, all.x=TRUE, all.y=FALSE)
@@ -66,7 +70,7 @@ fig_fn <- fig %>% add_markers(
 	x = ~x, y = ~y, size = ~n, 
 	marker = list(
 		color = toRGB("#238b45", alpha=0.9),
-		line = list(color=toRGB("white"))
+		line = list(color=toRGB("white")), sizemode="area"
 	),
 	hoverinfo = "text",
 	text = ~paste(sprintf("<b>%s</b></br>", colls$country), 
