@@ -33,7 +33,7 @@ packing <- circleProgressiveLayout(data$Freq, sizetype='area')
 # Add a column with the text you want to display for each bubble:
 data$text <- paste("Language: ",data$lang, "\n", 
 				   "Number of publications:", prettyNum(data$Freq, big.mark = ","))
-
+data$text[data$Freq < 50] <- NA
 # We can add these packing information to the initial data frame
 data <- cbind(data, packing)
 
@@ -44,7 +44,6 @@ data <- cbind(data, packing)
 # The next step is to go from one center + a radius to the coordinates of a circle that
 # is drawn by a multitude of straight lines.
 dat.gg <- circleLayoutVertices(packing, npoints=50)
-
 
 # Make the plot
 p <- ggplot() + 
@@ -65,6 +64,9 @@ p <- ggplot() +
 	coord_equal()
 
 widg <- ggiraph(ggobj = p, fonts="sans")
+widg <- girafe_options(widg,
+					opts_zoom(min = .7, max = 10)
+					) 
 
 # EPI ---------------------------------------------------------------------
 
