@@ -14,13 +14,20 @@ all_refs <- all_refs[all_refs$reference_no %in% unique(completed_refs$reference_
 all_refs <- all_refs[!all_refs$reference_no %in% manual_check$reference_no,]
 
 lang <- c(all_refs$language, manual_check$language)
+lang <- sort(lang, decreasing = T)
 lang[lang==""] <- "Unknown"
+lang[lang=="other"] <- "Unknown"
 
 data <- data.frame(table(lang))
 
 
 # Plot --------------------------------------------------------------------
 
+# * Language --------------------------------------------------------------
+
+
+set.seed(40)
+data <- data[sample(1:nrow(data), nrow(data)),] 
 packing <- circleProgressiveLayout(data$Freq, sizetype='area')
 
 # Add a column with the text you want to display for each bubble:
@@ -57,4 +64,69 @@ p <- ggplot() +
 	theme(legend.position="none") +
 	coord_equal()
 
-widg <- ggiraph(ggobj = p)
+widg <- ggiraph(ggobj = p, fonts="sans")
+
+# EPI ---------------------------------------------------------------------
+
+epi <- read.csv("data/2019_EPI.csv")
+epi$code <- countrycode::countrycode(epi$countries, "country.name", "iso3c")
+
+gdp <- read.csv(file.path("data", "2021-02-03_GDP_percapita_WorldBank.csv"), skip=4)[,-c(3:4)]
+colnames(gdp)[c(1:2)] <- c("country", "code")
+gdp_long <- reshape2::melt(gdp, id.vars = c("country", "code"), variable.name = "year", value.name = "gdp")
+gdp_long$year <- as.numeric(gsub("X", "", as.character(gdp_long$year)))
+
+epi <- merge(epi, gdp_long[gdp_long$year == 2019,], by="code")
+epi <- merge(epi, colls_n)
+
+
+fig <- plot_ly(epi, x = ~eep_9th_ed, y = ~gdp, text = 
+			   	~paste(sprintf("<b>%s</b></br>", epi$country),
+			   		   "<br><i>GDP:</i>",
+			   		   "$", prettyNum(epi$gdp, big.mark = ","),
+			   		   
+			   		   "<br><i>EEP Score:</i>", epi$eep_9th_ed,
+			   		   "<br><i>Number of fossil collections:</i>", 
+			   		   prettyNum(epi$freq, big.mark = ",")
+			   	),  
+			   size = 10,
+			   type = 'scatter', mode = 'markers', 
+			   color = ~freq, colors = colorRampPalette(pal[-2], bias=4)(10) 
+)
+
+
+f <- list(
+	family = "Roboto Mono",
+	size = 14,
+	color = "#7f7f7f"
+)
+x <- list(
+	title = "English Proficiency Index",
+	titlefont = f, 
+	showgrid=FALSE, 
+	type="log"
+)
+y <- list(
+	title = "Gross Domestic Product\n(GDP)per capita",
+	titlefont = f,
+	showgrid=FALSE
+)
+
+fig_eng <- fig %>% layout(title = 'Relationship between English skills and GDP',
+					  xaxis = x,
+					  yaxis = y,
+					  autosize = T, width = 550, height=250,
+					  annotations = 
+					  	list(x = 0.5, y = -0.5, #position of text adjust as needed 
+					  		 text = "All values given in the current international $", 
+					  		 showarrow = F, xref='paper', yref='paper', 
+					  		 xanchor='right', yanchor='auto', xshift=0, yshift=0,
+					  		 font=list(size=10, color="grey")),
+					  plot_bgcolor="rgba(0,0,0,0)",
+					  paper_bgcolor='rgba(0,0,0,0)',
+					  margin = m <- list(
+					  	b=75, pad=1
+					  ),
+					  showlegend = FALSE
+)
+

@@ -25,12 +25,6 @@ df.summary <- df %>%
 
 df.summary <- merge(df.summary, colls_n) # Add collection no
 
-desired_maximum_marker_size <- 40
-your_list_of_size_values <- df.summary$logfreq
-sizeref <- max(your_list_of_size_values) / (desired_maximum_marker_size**2)
-
-df.summary$logfreq <- log(df.summary$freq)
-
 fig <- plot_ly(df.summary, x = ~gdp, y = ~RD, text = 
 			   	~paste(sprintf("<b>%s</b></br>", df.summary$country),
 			   		   "<br><i>GDP:</i>",
@@ -82,5 +76,7 @@ fig <- fig %>% layout(title = 'Relationship between GDP and Research Funding',
 					  paper_bgcolor='rgba(0,0,0,0)',
 					  margin = m <- list(
 					  	b=75, pad=1
-					  )
+					  ),
+					  showlegend = FALSE
+					  
 )
