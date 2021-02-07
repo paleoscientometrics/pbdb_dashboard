@@ -78,8 +78,7 @@ y <- list(
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 opac <- range01(df.summary$epi)
 
-fig_hdi <- plot_ly(df.summary, colors = colorRampPalette(pal[-2], bias=2)(10),
-				   height=500)
+fig_hdi <- plot_ly(df.summary, colors = colorRampPalette(pal[-2], bias=2)(10))
 
 fig_hdi <- fig_hdi %>% layout(title = 'Global Peace, Economic Growth,\nHuman Development and Fossil Collections',
 							  xaxis = x,
@@ -137,8 +136,8 @@ fig_hdi <- fig_hdi %>%
 				 y = 2.8, yend = df.summary$GPI[df.summary$Countries=="China"], showlegend=F, 
 				 line=list(width=1,
 				 		  color='DarkSlateGrey')) %>% 
-add_segments(x = 0.68, xend = df.summary$hdi[df.summary$Countries=="Russia"], 
-			 y = df.summary$GPI[df.summary$Countries=="Russia"], 
+add_segments(x = 0.66, xend = df.summary$hdi[df.summary$Countries=="Russia"], 
+			 y = 2.9, 
 			 yend =  df.summary$GPI[df.summary$Countries=="Russia"], showlegend=F, 
 			 line=list(width=1,
 			 		  color='DarkSlateGrey'))
