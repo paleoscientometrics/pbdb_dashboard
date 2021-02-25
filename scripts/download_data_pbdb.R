@@ -69,13 +69,14 @@ save(all_refs, completed_refs, file="data/refs.RData")
 library(plotly)
 library(dplyr)
 
+pal <- c("#f0ffe9", "#ffe599", "#bbe487", "#4e9755", "#173109")
 load("data/refs.RData")
 
 fig <- plot_ly(
 	type = "indicator",
 	mode = "gauge+number",
 	value = length(unique(completed_refs$reference_no)),
-	title = list(text = "<b>Number of publications \ninjested</b>", font = list(size = 16)),
+	title = list(text = "<b>Number of publications \ningested</b>", font = list(size = 16)),
 	gauge = list(
 		axis = list(range = list(NULL, nrow(all_refs)), tickwidth = 1, tickcolor = "darkgreen"),
 		bar = list(color = toRGB(pal[5])),
